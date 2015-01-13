@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+chmod 777 /root
+ln -s /root/bin/ffmpeg /usr/local/bin/ffmpeg
+echo -e "10.0.0.5\tapi-transcode.hdviet.com" >> /etc/hosts
+hostname localhost
+/etc/init.d/celery_encode_video start
+
